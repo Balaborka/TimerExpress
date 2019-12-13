@@ -7,7 +7,19 @@
         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
         x:Class="TimerExpress.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="230" Width="210">
+        WindowState="Maximized"
+        WindowStyle="None"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        dx:ThemeManager.ThemeName="none"
+        x:Name="window"
+        Title="T5" MaxHeight="230" MaxWidth="210">
+
+    <Window.Background>
+        <LinearGradientBrush SpreadMethod="Pad" StartPoint="0,1" EndPoint="0.5,0">
+            <GradientStop Color="Green" Offset="0"></GradientStop>
+            <GradientStop Color="#95F23C" Offset="1.5"></GradientStop>
+        </LinearGradientBrush>
+    </Window.Background>
 
     <Window.Resources>
         <Style TargetType="dxlc:Tile">
@@ -41,25 +53,19 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush SpreadMethod="Pad" StartPoint="0,1" EndPoint="0.5,0">
-                <GradientStop Color="Green" Offset="0"></GradientStop>
-                <GradientStop Color="#95F23C" Offset="1.5"></GradientStop>
-            </LinearGradientBrush>
-        </Grid.Background>
-        
+    <DockPanel>
+        <local:TileBarControl DockPanel.Dock="Top" Width="210" Height="50" />
         <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <local:TimerControl DockPanel.Dock="Top" Margin="0,10,0,0" x:Name="myTimer" HorizontalAlignment="Center" />
 
-        <DockPanel HorizontalAlignment="Center">
-        <dxlc:Tile Header="Start" Click="StartTile_Click" Name="startTile" Background="#afff47">
-            <Image Name="startImage" Stretch="UniformToFill" Source="Images/start.png" />
-        </dxlc:Tile>
-        <dxlc:Tile Header="Stop" Click="StopTile_Click" Name="stopTile" Background="#82ff47">
-            <Image Name="stopImage" Stretch="UniformToFill" Source="Images/stop.png" />
-        </dxlc:Tile>
+            <DockPanel HorizontalAlignment="Center">
+                <dxlc:Tile Header="Start" Click="StartTile_Click" Name="startTile" Background="#afff47">
+                    <Image Name="startImage" Stretch="UniformToFill" Source="Images/start.png" />
+                </dxlc:Tile>
+                <dxlc:Tile Header="Stop" Click="StopTile_Click" Name="stopTile" Background="#82ff47">
+                    <Image Name="stopImage" Stretch="UniformToFill" Source="Images/stop.png" />
+                </dxlc:Tile>
+            </DockPanel>
         </DockPanel>
     </DockPanel>
-    </Grid>
 </Window>
