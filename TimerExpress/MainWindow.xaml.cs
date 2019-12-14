@@ -20,8 +20,16 @@ namespace TimerExpress {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-
+    public partial class MainWindow : ThemedWindow {
+        public override void OnApplyTemplate() {
+            base.OnApplyTemplate();
+            DockPanel t = (DockPanel)GetTemplateChild("PART_WindowHeaderContentAndStatusPanel");
+            t.Background = Brushes.LightGreen;
+            ThemedWindowHeader header = (ThemedWindowHeader)GetTemplateChild("PART_HeaderBorder");
+            header.Background = Brushes.LightGreen;
+            ThemedWindowContentBorder contentBorder = (ThemedWindowContentBorder)GetTemplateChild("PART_ContentBackgroundBorder");
+            contentBorder.BorderBrush = Brushes.LightGreen;
+        }
         public MainWindow() {
             InitializeComponent();
             this.DataContext = this;
