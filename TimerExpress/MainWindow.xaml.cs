@@ -3,6 +3,7 @@ using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Core;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,43 @@ namespace TimerExpress {
             else {
                 myTimer.Stop();
             }
+        }
+
+        private void SettingsTile_Click(object sender, EventArgs e) {
+
+        }
+    }
+    public class StateToVisibilitySettingsConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (value.ToString() == "Stopped")
+                return "Visible";
+            return "Collapsed";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            throw new NotImplementedException();
+        }
+    }
+    public class StateToVisibilityStartConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (value.ToString() == "Started")
+                return "Collapsed";
+            return "Visible";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            throw new NotImplementedException();
+        }
+    }
+    public class StateToVisibilityStopConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (value.ToString() == "Stopped")
+                return "Collapsed";
+            return "Visible";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            throw new NotImplementedException();
         }
     }
 }

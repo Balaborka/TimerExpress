@@ -26,8 +26,16 @@ namespace TimerExpress {
     /// </summary>
    
     public partial class TimerControl : UserControl, INotifyPropertyChanged {
-        public TimerState State { get; private set; }
+
         public int DurationMin { get; set; }
+
+        public TimerState State {
+            get => state;
+            private set {
+                state = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public int IncrementSec {
             get => incrementSec; 
@@ -44,6 +52,7 @@ namespace TimerExpress {
             }
         }
 
+        private TimerState state;
         private int incrementSec;
         private int incrementMin;
         DispatcherTimer dt;
