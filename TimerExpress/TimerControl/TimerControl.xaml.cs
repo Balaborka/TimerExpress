@@ -129,12 +129,6 @@ namespace TimerExpress {
         }
     }
 
-    public enum TimerState {
-        Started,
-        Paused,
-        Stopped
-    }
-
     public class TimeConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if ((int)value < 10)

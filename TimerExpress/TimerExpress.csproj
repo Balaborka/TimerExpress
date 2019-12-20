@@ -68,6 +68,7 @@
     <Compile Include="TimerControl\TimerControl.xaml.cs">
       <DependentUpon>TimerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TimerState.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,15 +114,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\settings.png" />
-    <Resource Include="Images\start.png" />
-    <Resource Include="Images\stop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\OMG.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\watch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\start.png" />
+    <Resource Include="Images\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

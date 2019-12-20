@@ -53,33 +53,21 @@ namespace TimerExpress {
 
         }
     }
-    public class StateToVisibilitySettingsConverter : IValueConverter {
+    public class StateToVisibilityConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            if (value.ToString() == "Stopped")
+            if (parameter.ToString() == "startTile") {
+                if ((TimerState)value == TimerState.Started)
+                    return "Collapsed";
+                return "Visible";
+            }
+            if (parameter.ToString() == "stopTile") {
+                if ((TimerState)value == TimerState.Stopped)
+                    return "Collapsed";
+                return "Visible";
+            }
+            if ((TimerState)value == TimerState.Stopped)
                 return "Visible";
             return "Collapsed";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            throw new NotImplementedException();
-        }
-    }
-    public class StateToVisibilityStartConverter : IValueConverter {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            if (value.ToString() == "Started")
-                return "Collapsed";
-            return "Visible";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            throw new NotImplementedException();
-        }
-    }
-    public class StateToVisibilityStopConverter : IValueConverter {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            if (value.ToString() == "Stopped")
-                return "Collapsed";
-            return "Visible";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
