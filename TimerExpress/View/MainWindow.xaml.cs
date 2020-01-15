@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Core;
+using DevExpress.Xpf.LayoutControl;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimerExpress.ViewModel;
 
 namespace TimerExpress {
     /// <summary>
@@ -31,47 +33,40 @@ namespace TimerExpress {
             ThemedWindowContentBorder contentBorder = (ThemedWindowContentBorder)GetTemplateChild("PART_ContentBackgroundBorder");
             contentBorder.BorderBrush = Brushes.LightGreen;
         }
+
+        TimerViewModel VM;
+
         public MainWindow() {
             InitializeComponent();
-            this.DataContext = this;
+
+            VM = ViewModelSource<TimerViewModel>.Create();
+            this.DataContext = VM;
+
+            EventManager.RegisterClassHandler(typeof(Tile), LoadedEvent, new RoutedEventHandler((d, e) => ((Tile)d).Padding = new Thickness(10)));
         }
 
         private void StartTile_Click(object sender, EventArgs e) {
-            myTimer.Start();
+            VM.Start();
         }
 
         private void StopTile_Click(object sender, EventArgs e) {
-            if (myTimer.State == TimerState.Started) {
-                myTimer.Pause();
+            if (VM.Timer.State == TimerState.Started) {
+                VM.Pause();
             }
             else {
-                myTimer.Stop();
+                VM.Stop();
             }
         }
 
         private void SettingsTile_Click(object sender, EventArgs e) {
-
-        }
-    }
-    public class StateToVisibilityConverter : IValueConverter {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            if (parameter.ToString() == "startTile") {
-                if ((TimerState)value == TimerState.Started)
-                    return "Collapsed";
-                return "Visible";
-            }
-            if (parameter.ToString() == "stopTile") {
-                if ((TimerState)value == TimerState.Stopped)
-                    return "Collapsed";
-                return "Visible";
-            }
-            if ((TimerState)value == TimerState.Stopped)
-                return "Visible";
-            return "Collapsed";
+            dpTimer.Visibility = Visibility.Collapsed;
+            gridSettings.Visibility = Visibility.Visible;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            throw new NotImplementedException();
+        private void CloseSettingsBtn_Click(object sender, RoutedEventArgs e) {
+            timerMinuteLabel.Content = durationSettingBox.Text;
+            gridSettings.Visibility = Visibility.Collapsed;
+            dpTimer.Visibility = Visibility.Visible;
         }
     }
 }
